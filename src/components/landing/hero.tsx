@@ -24,7 +24,9 @@ export function Hero() {
         <div className="absolute -top-40 left-1/2 size-144 -translate-x-1/2 rounded-full bg-accent opacity-70 blur-3xl" />
       </div>
 
-      <div className={`${containerClass} grid items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:pb-28`}>
+      <div
+        className={`${containerClass} grid items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:pb-28`}
+      >
         <div className="text-center lg:text-left">
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-sm font-medium text-muted-foreground shadow-sm">
             <span aria-hidden="true" className="size-2 rounded-full bg-success" />

@@ -21,7 +21,9 @@ export function Cta() {
           <h2 id="cta-heading" className="text-h2 text-balance">
             {finalCta.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-pretty opacity-90">{finalCta.description}</p>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-pretty opacity-90">
+            {finalCta.description}
+          </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
               asChild

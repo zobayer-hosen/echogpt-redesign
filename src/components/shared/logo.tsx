@@ -5,7 +5,12 @@ import { cn } from "@/lib/utils";
 /** EchoGPT mark: a source dot with two echo waves. Decorative; the link carries the name. */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" className={cn("size-8 shrink-0", className)}>
+    <svg
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+      focusable="false"
+      className={cn("size-8 shrink-0", className)}
+    >
       <rect width="32" height="32" rx="9" className="fill-primary" />
       <circle cx="11" cy="16" r="3.2" className="fill-primary-foreground" />
       <path
@@ -38,7 +43,10 @@ export function Logo({ href = "/", className, markClassName, showWordmark = true
     <Link
       href={href}
       aria-label="EchoGPT home"
-      className={cn("inline-flex items-center gap-2 rounded-lg font-semibold tracking-tight", className)}
+      className={cn(
+        "inline-flex items-center gap-2 rounded-lg font-semibold tracking-tight",
+        className,
+      )}
     >
       <LogoMark className={markClassName} />
       {showWordmark && <span className="text-lg">EchoGPT</span>}

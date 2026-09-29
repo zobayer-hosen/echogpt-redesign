@@ -26,7 +26,9 @@ export function Section({ id, copy, className, children }: SectionProps) {
     >
       <div className={containerClass}>
         <Reveal className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
-          <p className="mb-3 text-sm font-semibold tracking-wide text-primary uppercase">{copy.eyebrow}</p>
+          <p className="mb-3 text-sm font-semibold tracking-wide text-primary uppercase">
+            {copy.eyebrow}
+          </p>
           <h2 id={headingId} className="text-h2 text-balance">
             {copy.title}
           </h2>

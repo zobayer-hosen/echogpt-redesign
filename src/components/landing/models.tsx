@@ -14,7 +14,11 @@ export function Models() {
     <Section id="models" copy={sections.models} className="bg-muted/40">
       <RevealList className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {models.map((model) => (
-          <RevealItem key={model.id} lift className="flex flex-col rounded-2xl border bg-card p-5 shadow-sm">
+          <RevealItem
+            key={model.id}
+            lift
+            className="flex flex-col rounded-2xl border bg-card p-5 shadow-sm"
+          >
             <div className="flex items-start gap-3">
               <ProviderMark provider={model.provider} size="lg" />
               <div className="min-w-0 flex-1">

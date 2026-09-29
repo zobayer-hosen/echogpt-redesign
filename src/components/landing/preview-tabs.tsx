@@ -43,7 +43,9 @@ export function PreviewTabs() {
                 className="hidden h-auto w-full dark:block"
               />
             </div>
-            <figcaption className="mt-4 text-center text-sm text-muted-foreground">{tab.caption}</figcaption>
+            <figcaption className="mt-4 text-center text-sm text-muted-foreground">
+              {tab.caption}
+            </figcaption>
           </figure>
         </TabsContent>
       ))}

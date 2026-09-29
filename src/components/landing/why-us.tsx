@@ -43,10 +43,16 @@ export function WhyUs() {
                 <th scope="col" className="px-4 py-3 font-medium text-muted-foreground">
                   Feature
                 </th>
-                <th scope="col" className="w-24 px-2 py-3 text-center font-semibold text-primary sm:w-28">
+                <th
+                  scope="col"
+                  className="w-24 px-2 py-3 text-center font-semibold text-primary sm:w-28"
+                >
                   EchoGPT
                 </th>
-                <th scope="col" className="w-24 px-2 py-3 text-center font-medium text-muted-foreground sm:w-28">
+                <th
+                  scope="col"
+                  className="w-24 px-2 py-3 text-center font-medium text-muted-foreground sm:w-28"
+                >
                   Separate sites
                 </th>
               </tr>

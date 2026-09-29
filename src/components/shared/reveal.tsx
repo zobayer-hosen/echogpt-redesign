@@ -17,7 +17,13 @@ interface RevealProps {
 
 export function Reveal({ children, className }: RevealProps) {
   return (
-    <m.div variants={fadeUp} initial="hidden" whileInView="show" viewport={inViewOnce} className={className}>
+    <m.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={inViewOnce}
+      className={className}
+    >
       {children}
     </m.div>
   );
@@ -25,7 +31,13 @@ export function Reveal({ children, className }: RevealProps) {
 
 export function RevealList({ children, className }: RevealProps) {
   return (
-    <m.ul variants={stagger} initial="hidden" whileInView="show" viewport={inViewOnce} className={className}>
+    <m.ul
+      variants={stagger}
+      initial="hidden"
+      whileInView="show"
+      viewport={inViewOnce}
+      className={className}
+    >
       {children}
     </m.ul>
   );

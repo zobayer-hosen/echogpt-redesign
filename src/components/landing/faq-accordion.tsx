@@ -1,7 +1,12 @@
 "use client";
 
 import { Reveal } from "@/components/shared/reveal";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { faqs } from "@/lib/data/faq";
 
 /** Radix accordion: arrow keys, Home/End and aria-expanded come for free. */

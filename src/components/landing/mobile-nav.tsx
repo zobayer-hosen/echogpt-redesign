@@ -42,10 +42,21 @@ export function MobileNav() {
 
   return (
     <>
-      <IconButton label="Open menu" tooltip={false} className="md:hidden" onClick={() => setOpen(true)}>
+      <IconButton
+        label="Open menu"
+        tooltip={false}
+        className="md:hidden"
+        onClick={() => setOpen(true)}
+      >
         <Menu />
       </IconButton>
-      <Sheet open={open} onOpenChange={setOpen} side="right" title="Menu" onCloseAutoFocus={onCloseAutoFocus}>
+      <Sheet
+        open={open}
+        onOpenChange={setOpen}
+        side="right"
+        title="Menu"
+        onCloseAutoFocus={onCloseAutoFocus}
+      >
         <div className="flex h-16 items-center justify-between border-b px-4">
           <Logo />
           <SheetClose asChild>

@@ -27,7 +27,7 @@ function PlanCard({ plan, cycle }: { plan: PricingPlan; cycle: BillingCycle }) {
       whileHover={hoverLift}
       className={cn(
         "relative flex flex-col rounded-2xl border bg-card p-6 lg:p-8",
-        plan.highlighted && "border-primary shadow-xl shadow-primary/15 ring-1 ring-primary",
+        plan.highlighted && "border-primary shadow-xl ring-1 shadow-primary/15 ring-primary",
       )}
     >
       {plan.highlighted && (
