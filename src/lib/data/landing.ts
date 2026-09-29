@@ -38,14 +38,12 @@ export const sections: Record<
   why: {
     eyebrow: "Why EchoGPT",
     title: "Stop juggling AI tabs",
-    description:
-      "One workspace instead of a separate site, account and history for every model.",
+    description: "One workspace instead of a separate site, account and history for every model.",
   },
   pricing: {
     eyebrow: "Pricing",
     title: "Start free. Upgrade when you need more.",
-    description:
-      "Sample pricing for this concept. See echogpt.live for current plans and limits.",
+    description: "Sample pricing for this concept. See echogpt.live for current plans and limits.",
   },
   faq: {
     eyebrow: "FAQ",
@@ -80,15 +78,15 @@ export const previewTabs = [
     label: "Extension popup",
     caption: "A 380 × 600 popup with quick actions, history and settings a tap away.",
     image: "extension-popup",
-    width: 1440,
-    height: 900,
+    width: 1216,
+    height: 847,
   },
   {
     id: "panel",
     label: "Side panel",
     caption: "Expand into a full-height side panel that stays open beside the page.",
     image: "side-panel",
-    width: 1440,
-    height: 900,
+    width: 1216,
+    height: 847,
   },
 ] as const;
