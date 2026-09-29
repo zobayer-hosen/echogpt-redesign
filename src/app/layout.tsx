@@ -56,6 +56,10 @@ export const viewport: Viewport = {
   ],
 };
 
+// Vercel serves the Analytics / Speed Insights scripts only on Vercel deployments
+// (with both enabled in the project dashboard); elsewhere they 404 and log errors.
+const onVercel = process.env.VERCEL === "1";
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
@@ -66,8 +70,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
         <SkipLink />
         <Providers>{children}</Providers>
-        <Analytics />
-        <SpeedInsights />
+        {onVercel && <Analytics />}
+        {onVercel && <SpeedInsights />}
       </body>
     </html>
   );
