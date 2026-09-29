@@ -75,7 +75,7 @@ Optional: copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` (us
 - **The extension is a web prototype** of the concept, not a packaged Manifest V3 build.
 - **Data stays in the browser** (localStorage). Clearing site data resets the seeded demo history.
 - **Branding:** the EchoGPT name is used because the product belongs to the company setting the assignment; the logo mark here is a simple placeholder drawn for this project.
-- **Display font:** the PRD’s first choice, Soria, is distributed under different licences on different download sites and I couldn’t verify one, so I used the PRD’s **Plan B — Instrument Serif (SIL OFL)** via `next/font/google`. Swapping to Soria is a one-line change in `src/app/fonts.ts`.
+- **Display font:** the [PRD](docs/PRD.md)’s first choice, Soria, is distributed under different licences on different download sites and I couldn’t verify one, so I used the PRD’s **Plan B — Instrument Serif (SIL OFL)** via `next/font/google`. Swapping to Soria is a one-line change in `src/app/fonts.ts`.
 - **Next.js 15 is pinned** as the PRD specifies (npm `latest` is 16.x). Next 15 pins an older PostCSS with published advisories, so `package.json` overrides it to a patched version; `npm audit` reports 0 vulnerabilities.
 
 ## 5. Additional features
@@ -144,7 +144,7 @@ src/
 | Extension | Compare is mentioned but has no dedicated view                        | “Compare 2 models” switch; side-by-side view in the web app |
 | Extension | Low awareness (123 users, 7 ratings on the store listing)             | Landing CTAs point to the Chrome Web Store listing          |
 
-The PRD also lists web-app findings marked “verify” (chat layout, mobile sidebar, keyboard focus/contrast) that need screenshots of the live signed-in app; those before/after captures are still to be added.
+The [PRD](docs/PRD.md) also lists web-app findings marked “verify” (chat layout, mobile sidebar, keyboard focus/contrast) that need screenshots of the live signed-in app; those before/after captures are still to be added.
 
 ### Known limitations / next steps
 
