@@ -176,6 +176,15 @@ export interface Feature {
   icon: LucideIcon;
 }
 
+/** One row of the landing "right model for every task" picker (B-03). */
+export interface ModelTask {
+  /** Model recommended for the task; its `bestFor` is the task label. */
+  modelId: string;
+  icon: LucideIcon;
+  /** Example prompt shown in the spotlight card. */
+  prompt: string;
+}
+
 export interface Benefit {
   id: string;
   title: string;

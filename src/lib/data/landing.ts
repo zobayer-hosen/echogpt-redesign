@@ -1,9 +1,21 @@
-import type { SectionCopy } from "@/types";
+import {
+  Brain,
+  Database,
+  FileText,
+  Languages,
+  Lightbulb,
+  MessageCircle,
+  Microscope,
+  PenLine,
+  Sigma,
+} from "lucide-react";
+
+import type { ModelTask, SectionCopy } from "@/types";
 
 /** Section copy for the landing page (NFR-Q4: content lives in lib/data, not JSX). */
 
 export const hero = {
-  eyebrow: "New · Side panel for Chrome",
+  eyebrow: { badge: "New", label: "Side panel for Chrome", href: "/extension" },
   titleWords: ["Every", "top", "AI", "model."],
   titleAccent: "One sidebar.",
   description:
@@ -11,6 +23,62 @@ export const hero = {
   primaryCta: "Add to Chrome — it's free",
   secondaryCta: "Start chatting",
   trust: "Free on the Chrome Web Store",
+  worksWith: "Works with",
+  /** Floating cards around the product mock (decorative, part of the illustration). */
+  highlights: {
+    summary: { title: "Page summarized", detail: "5 key points · Claude Sonnet" },
+    providers: { label: "AI providers,\none side panel" },
+    shortcut: { keys: ["Ctrl", "Shift", "E"], label: "Open on any page" },
+  },
+};
+
+/** B-03 task picker: each task maps to the model we'd recommend for it. */
+export const modelTasks: ModelTask[] = [
+  { modelId: "gemini-flash", icon: FileText, prompt: "Summarize this article in 5 bullet points." },
+  {
+    modelId: "claude-sonnet",
+    icon: PenLine,
+    prompt: "Tighten this 2,000-word report into one clear page.",
+  },
+  {
+    modelId: "claude-opus",
+    icon: Microscope,
+    prompt: "Review this pull request and flag the risky changes.",
+  },
+  {
+    modelId: "gpt-flagship",
+    icon: Brain,
+    prompt: "Plan a step-by-step migration from REST to GraphQL.",
+  },
+  {
+    modelId: "gpt-mini",
+    icon: MessageCircle,
+    prompt: "What's a good gift for someone who loves hiking?",
+  },
+  {
+    modelId: "gemini-pro",
+    icon: Database,
+    prompt: "Compare these three survey results and spot the trends.",
+  },
+  { modelId: "deepseek", icon: Sigma, prompt: "Show step by step why this series converges." },
+  {
+    modelId: "mistral-large",
+    icon: Languages,
+    prompt: "Translate this email into French and German.",
+  },
+  { modelId: "llama", icon: Lightbulb, prompt: "Give me 10 names for a coffee subscription." },
+];
+
+export const modelShowcase = {
+  listLabel: "Choose a task",
+  promptLabel: "Try asking",
+  speed: "Speed",
+  quality: "Quality",
+  context: "Context",
+  contextUnit: "tokens",
+  free: "Free",
+  pro: "Pro",
+  cta: "Try it in the web app",
 };
 
 export const sections: Record<

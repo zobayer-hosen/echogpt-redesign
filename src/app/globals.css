@@ -114,8 +114,6 @@
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 
   --animate-fade-up: fade-up 0.6s var(--ease-out-expo) both;
-  --animate-mock-in: mock-in 0.6s var(--ease-out-expo) 0.3s both;
-  --animate-float: float 6s ease-in-out infinite;
   --animate-typing: typing 1.2s ease-in-out infinite;
   --animate-pop-in: pop-in 0.15s var(--ease-out-expo);
   --animate-accordion-down: accordion-down 0.25s var(--ease-out-expo);
@@ -162,27 +160,6 @@
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes mock-in {
-    from {
-      opacity: 0;
-      transform: translateY(24px) scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-8px);
     }
   }
 
