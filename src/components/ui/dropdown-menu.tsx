@@ -42,7 +42,11 @@ export function DropdownMenuItem({
 }: ComponentProps<typeof DropdownMenuPrimitive.Item> & { destructive?: boolean }) {
   return (
     <DropdownMenuPrimitive.Item
-      className={cn(itemClass, destructive && "text-destructive [&_svg]:text-destructive", className)}
+      className={cn(
+        itemClass,
+        destructive && "text-destructive [&_svg]:text-destructive",
+        className,
+      )}
       {...props}
     />
   );
@@ -80,6 +84,9 @@ export function DropdownMenuSeparator({
   ...props
 }: ComponentProps<typeof DropdownMenuPrimitive.Separator>) {
   return (
-    <DropdownMenuPrimitive.Separator className={cn("-mx-1 my-1 h-px bg-border", className)} {...props} />
+    <DropdownMenuPrimitive.Separator
+      className={cn("-mx-1 my-1 h-px bg-border", className)}
+      {...props}
+    />
   );
 }

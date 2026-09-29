@@ -25,9 +25,13 @@ export const usePromptsStore = create<PromptsState>()(
       removeTemplate: (id) =>
         set((state) => ({ templates: state.templates.filter((template) => template.id !== id) })),
       addCustomAction: (action) =>
-        set((state) => ({ customActions: [...state.customActions, { ...action, id: createId("a") }] })),
+        set((state) => ({
+          customActions: [...state.customActions, { ...action, id: createId("a") }],
+        })),
       removeCustomAction: (id) =>
-        set((state) => ({ customActions: state.customActions.filter((action) => action.id !== id) })),
+        set((state) => ({
+          customActions: state.customActions.filter((action) => action.id !== id),
+        })),
     }),
     {
       name: "echogpt-prompts",

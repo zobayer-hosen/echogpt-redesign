@@ -94,6 +94,13 @@ export interface Conversation {
   origin: ConversationOrigin;
 }
 
+/** A user prompt and its replies (two replies in compare mode). */
+export interface Turn {
+  key: string;
+  user?: Message;
+  replies: Message[];
+}
+
 export interface DateGroup<T> {
   label: string;
   items: T[];

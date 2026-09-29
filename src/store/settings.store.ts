@@ -52,7 +52,8 @@ export const useSettingsStore = create<SettingsState>()(
       version: 1,
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,
-      partialize: ({ update: _update, toggleFavorite: _toggle, reset: _reset, ...values }) => values,
+      partialize: ({ update: _update, toggleFavorite: _toggle, reset: _reset, ...values }) =>
+        values,
     },
   ),
 );

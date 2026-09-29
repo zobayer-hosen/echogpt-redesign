@@ -36,4 +36,6 @@ export const footerColumns: FooterColumn[] = [
   },
 ];
 
-export const socialLinks: NavLink[] = [{ label: "GitHub", href: siteConfig.repoUrl, external: true }];
+export const socialLinks: NavLink[] = [
+  { label: "GitHub", href: siteConfig.repoUrl, external: true },
+];

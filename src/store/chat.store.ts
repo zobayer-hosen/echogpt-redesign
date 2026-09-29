@@ -32,7 +32,9 @@ function mapConversation(
   id: string,
   fn: (conversation: Conversation) => Conversation,
 ) {
-  return conversations.map((conversation) => (conversation.id === id ? fn(conversation) : conversation));
+  return conversations.map((conversation) =>
+    conversation.id === id ? fn(conversation) : conversation,
+  );
 }
 
 /** A reload mid-stream leaves messages "streaming" forever; mark them stopped instead. */
@@ -87,7 +89,10 @@ export const useChatStore = create<ChatState>()(
 
       togglePin: (id) =>
         set((state) => ({
-          conversations: mapConversation(state.conversations, id, (c) => ({ ...c, pinned: !c.pinned })),
+          conversations: mapConversation(state.conversations, id, (c) => ({
+            ...c,
+            pinned: !c.pinned,
+          })),
         })),
 
       setModel: (id, modelId) =>
@@ -101,7 +106,10 @@ export const useChatStore = create<ChatState>()(
 
       setCompareModel: (id, compareModelId) =>
         set((state) => ({
-          conversations: mapConversation(state.conversations, id, (c) => ({ ...c, compareModelId })),
+          conversations: mapConversation(state.conversations, id, (c) => ({
+            ...c,
+            compareModelId,
+          })),
         })),
 
       addMessage: (conversationId, message) =>

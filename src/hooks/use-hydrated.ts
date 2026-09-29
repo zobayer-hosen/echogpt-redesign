@@ -11,7 +11,8 @@ const persistedStores = [useChatStore, useSettingsStore, usePromptsStore];
 let hydration: Promise<void> | null = null;
 
 function allHydrated() {
-  return persistedStores.every((store) => store.persist.hasHydrated());
+  // `persist` is absent on the server, where localStorage doesn't exist.
+  return persistedStores.every((store) => store.persist?.hasHydrated() ?? false);
 }
 
 /**

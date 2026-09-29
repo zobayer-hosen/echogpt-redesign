@@ -13,7 +13,8 @@ export const suggestedPrompts: SuggestedPrompt[] = [
   {
     id: "s-code",
     title: "Write some code",
-    prompt: "Write a TypeScript function that debounces another function, with a short usage example.",
+    prompt:
+      "Write a TypeScript function that debounces another function, with a short usage example.",
     icon: CodeXml,
   },
   {

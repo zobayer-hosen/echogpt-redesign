@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { AnimatePresence, m } from "motion/react";
 import { type ComponentProps, createContext, type ReactNode, useContext } from "react";
 
+import { useReturnFocus } from "@/hooks/use-return-focus";
 import { dialogIn, overlayFade } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -12,10 +13,15 @@ import { IconButton } from "./icon-button";
 
 /*
  * Controlled Radix dialog animated with AnimatePresence. Radix provides the
- * focus trap, Escape handling and focus return on close (NFR-A3).
+ * focus trap and Escape handling; useReturnFocus restores focus on close (NFR-A3).
  */
 
-const OpenContext = createContext(false);
+interface DialogState {
+  open: boolean;
+  returnFocus: (event: Event, handler?: (event: Event) => void) => void;
+}
+
+const DialogStateContext = createContext<DialogState>({ open: false, returnFocus: () => {} });
 
 interface DialogProps {
   open: boolean;
@@ -24,9 +30,12 @@ interface DialogProps {
 }
 
 export function Dialog({ open, onOpenChange, children }: DialogProps) {
+  const returnFocus = useReturnFocus(open);
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
-      <OpenContext.Provider value={open}>{children}</OpenContext.Provider>
+      <DialogStateContext.Provider value={{ open, returnFocus }}>
+        {children}
+      </DialogStateContext.Provider>
     </DialogPrimitive.Root>
   );
 }
@@ -34,8 +43,8 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClose = DialogPrimitive.Close;
 
-export function useDialogOpen() {
-  return useContext(OpenContext);
+export function useDialogState() {
+  return useContext(DialogStateContext);
 }
 
 export function DialogOverlay() {
@@ -55,19 +64,20 @@ export function DialogOverlay() {
 interface DialogContentProps extends ComponentProps<typeof DialogPrimitive.Content> {
   title: string;
   description?: string;
-  /** Visually hide the title (it is still announced). */
-  hideTitle?: boolean;
+  /** No header or padding (e.g. command palette); the title is still announced. */
+  bare?: boolean;
 }
 
 export function DialogContent({
   title,
   description,
-  hideTitle,
+  bare,
   className,
   children,
+  onCloseAutoFocus,
   ...props
 }: DialogContentProps) {
-  const open = useDialogOpen();
+  const { open, returnFocus } = useDialogState();
   return (
     <AnimatePresence>
       {open && (
@@ -77,6 +87,7 @@ export function DialogContent({
             asChild
             forceMount
             {...(description ? {} : { "aria-describedby": undefined })}
+            onCloseAutoFocus={(event) => returnFocus(event, onCloseAutoFocus)}
             {...props}
           >
             <m.div
@@ -89,22 +100,38 @@ export function DialogContent({
                 className,
               )}
             >
-              <div className="flex items-start justify-between gap-4 border-b px-5 py-4">
-                <div className={cn("min-w-0", hideTitle && "sr-only")}>
-                  <DialogPrimitive.Title className="text-base font-semibold">{title}</DialogPrimitive.Title>
-                  {description && (
-                    <DialogPrimitive.Description className="mt-1 text-sm text-muted-foreground">
-                      {description}
-                    </DialogPrimitive.Description>
-                  )}
-                </div>
-                <DialogPrimitive.Close asChild>
-                  <IconButton label="Close dialog" size="icon-sm" tooltip={false} className="-mr-1">
-                    <X />
-                  </IconButton>
-                </DialogPrimitive.Close>
-              </div>
-              <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">{children}</div>
+              {bare ? (
+                <>
+                  <DialogPrimitive.Title className="sr-only">{title}</DialogPrimitive.Title>
+                  {children}
+                </>
+              ) : (
+                <>
+                  <div className="flex items-start justify-between gap-4 border-b px-5 py-4">
+                    <div className="min-w-0">
+                      <DialogPrimitive.Title className="font-sans text-base font-semibold tracking-normal">
+                        {title}
+                      </DialogPrimitive.Title>
+                      {description && (
+                        <DialogPrimitive.Description className="mt-1 text-sm text-muted-foreground">
+                          {description}
+                        </DialogPrimitive.Description>
+                      )}
+                    </div>
+                    <DialogPrimitive.Close asChild>
+                      <IconButton
+                        label="Close dialog"
+                        size="icon-sm"
+                        tooltip={false}
+                        className="-mr-1"
+                      >
+                        <X />
+                      </IconButton>
+                    </DialogPrimitive.Close>
+                  </div>
+                  <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">{children}</div>
+                </>
+              )}
             </m.div>
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>

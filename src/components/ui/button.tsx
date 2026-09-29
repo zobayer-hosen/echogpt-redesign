@@ -14,8 +14,7 @@ export const buttonVariants = cva(
         outline: "border border-input bg-card text-foreground hover:bg-muted",
         ghost: "text-foreground hover:bg-muted",
         subtle: "bg-accent text-accent-foreground hover:bg-accent/80",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         link: "h-auto px-0 text-primary underline-offset-4 hover:underline",
       },
       size: {

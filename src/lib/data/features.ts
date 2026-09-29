@@ -1,11 +1,4 @@
-import {
-  BookMarked,
-  Columns2,
-  FileText,
-  Layers,
-  ShieldCheck,
-  TextSelect,
-} from "lucide-react";
+import { BookMarked, Columns2, FileText, Layers, ShieldCheck, TextSelect } from "lucide-react";
 
 import type { Feature } from "@/types";
 

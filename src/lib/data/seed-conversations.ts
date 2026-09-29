@@ -16,7 +16,12 @@ function ruleReply(ruleId: string, variant: number, topic: string) {
   return rule ? rule.variants[variant % 2](topic) : "";
 }
 
-function user(id: string, content: string, createdAt: number, extra: Partial<Message> = {}): Message {
+function user(
+  id: string,
+  content: string,
+  createdAt: number,
+  extra: Partial<Message> = {},
+): Message {
   return { id, role: "user", content, createdAt, ...extra };
 }
 
@@ -28,7 +33,17 @@ function reply(
   createdAt: number,
   extra: Partial<Message> = {},
 ): Message {
-  return { id, role: "assistant", content, createdAt, modelId, parentId, status: "done", variant: 0, ...extra };
+  return {
+    id,
+    role: "assistant",
+    content,
+    createdAt,
+    modelId,
+    parentId,
+    status: "done",
+    variant: 0,
+    ...extra,
+  };
 }
 
 function conversation(
@@ -61,7 +76,13 @@ export function createSeedConversations(now = Date.now()): Conversation[] {
           "Write a TypeScript function that debounces another function, with a short usage example.",
           t(42 * MINUTE),
         ),
-        reply("seed-debounce-a1", "seed-debounce-u1", "claude-sonnet", ruleReply("debounce", 0, ""), t(41 * MINUTE)),
+        reply(
+          "seed-debounce-a1",
+          "seed-debounce-u1",
+          "claude-sonnet",
+          ruleReply("debounce", 0, ""),
+          t(41 * MINUTE),
+        ),
       ],
     }),
     conversation({
@@ -72,7 +93,12 @@ export function createSeedConversations(now = Date.now()): Conversation[] {
       messages: [
         user("seed-article-u1", `Summarize this page: ${demoArticle.title}`, t(2 * HOUR), {
           actionId: "summarize",
-          context: { kind: "page", title: demoArticle.title, url: demoArticle.url, text: demoArticleExcerpt },
+          context: {
+            kind: "page",
+            title: demoArticle.title,
+            url: demoArticle.url,
+            text: demoArticleExcerpt,
+          },
         }),
         reply(
           "seed-article-a1",
@@ -117,9 +143,16 @@ export function createSeedConversations(now = Date.now()): Conversation[] {
           "Draft a polite email to my manager asking to move our 1:1 meeting to Thursday.",
           t(3 * DAY),
         ),
-        reply("seed-email-a1", "seed-email-u1", "gpt-mini", ruleReply("meeting-email", 0, ""), t(3 * DAY - MINUTE), {
-          feedback: "up",
-        }),
+        reply(
+          "seed-email-a1",
+          "seed-email-u1",
+          "gpt-mini",
+          ruleReply("meeting-email", 0, ""),
+          t(3 * DAY - MINUTE),
+          {
+            feedback: "up",
+          },
+        ),
       ],
     }),
     conversation({
@@ -145,7 +178,13 @@ export function createSeedConversations(now = Date.now()): Conversation[] {
           "Summarize the key points of the pros and cons of remote work in five bullet points.",
           t(12 * DAY),
         ),
-        reply("seed-remote-a1", "seed-remote-u1", "mistral-large", ruleReply("remote-work", 0, ""), t(12 * DAY - MINUTE)),
+        reply(
+          "seed-remote-a1",
+          "seed-remote-u1",
+          "mistral-large",
+          ruleReply("remote-work", 0, ""),
+          t(12 * DAY - MINUTE),
+        ),
       ],
     }),
     conversation({
@@ -154,7 +193,13 @@ export function createSeedConversations(now = Date.now()): Conversation[] {
       modelId: "deepseek",
       messages: [
         user("seed-hello-u1", "Hello! What can you help me with?", t(20 * DAY)),
-        reply("seed-hello-a1", "seed-hello-u1", "deepseek", ruleReply("greeting", 0, ""), t(20 * DAY - MINUTE)),
+        reply(
+          "seed-hello-a1",
+          "seed-hello-u1",
+          "deepseek",
+          ruleReply("greeting", 0, ""),
+          t(20 * DAY - MINUTE),
+        ),
       ],
     }),
   ];

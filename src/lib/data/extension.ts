@@ -35,7 +35,8 @@ export const conceptHighlights: ConceptHighlight[] = [
   {
     id: "actions",
     title: "Six quick actions + custom",
-    description: "Summarize and explain are joined by translate, rewrite, key points and email replies.",
+    description:
+      "Summarize and explain are joined by translate, rewrite, key points and email replies.",
     icon: Zap,
   },
   {
@@ -47,7 +48,8 @@ export const conceptHighlights: ConceptHighlight[] = [
   {
     id: "context",
     title: "Visible page context",
-    description: "A chip shows exactly which page or selection is attached, and removes it in one click.",
+    description:
+      "A chip shows exactly which page or selection is attached, and removes it in one click.",
     icon: MousePointerClick,
   },
   {
@@ -82,7 +84,8 @@ export const onboardingSteps = [
   {
     id: "pin",
     title: "Pin EchoGPT",
-    description: "Click the puzzle icon in Chrome's toolbar and pin EchoGPT so it's always one click away.",
+    description:
+      "Click the puzzle icon in Chrome's toolbar and pin EchoGPT so it's always one click away.",
     action: "Done",
     icon: Pin,
   },

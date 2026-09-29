@@ -56,14 +56,20 @@ export function sendMessage(input: SendMessageInput): string {
   };
   chat.addMessage(conversationId, userMessage);
 
-  const modelIds = [conversation.modelId, conversation.compareModelId].filter(
-    (id): id is string => Boolean(id),
+  const modelIds = [conversation.modelId, conversation.compareModelId].filter((id): id is string =>
+    Boolean(id),
   );
   const isCompare = modelIds.length > 1;
 
   modelIds.forEach((modelId, slot) => {
     const variant = isCompare ? slot : hashString(modelId) % 2;
-    void runReply({ conversationId, parent: userMessage, modelId, variant, selection: input.selection });
+    void runReply({
+      conversationId,
+      parent: userMessage,
+      modelId,
+      variant,
+      selection: input.selection,
+    });
   });
 
   return conversationId;
@@ -79,7 +85,14 @@ interface RunReplyInput {
   messageId?: string;
 }
 
-async function runReply({ conversationId, parent, modelId, variant, selection, messageId }: RunReplyInput) {
+async function runReply({
+  conversationId,
+  parent,
+  modelId,
+  variant,
+  selection,
+  messageId,
+}: RunReplyInput) {
   const chat = useChatStore.getState();
   const stream = useStreamStore.getState();
   const id = messageId ?? createId("m");
@@ -118,7 +131,8 @@ async function runReply({ conversationId, parent, modelId, variant, selection, m
       modelId,
       variant,
       actionId: parent.actionId,
-      selection: selection ?? (parent.context?.kind === "selection" ? parent.context.text : undefined),
+      selection:
+        selection ?? (parent.context?.kind === "selection" ? parent.context.text : undefined),
       language: useSettingsStore.getState().language,
       signal: controller.signal,
     });

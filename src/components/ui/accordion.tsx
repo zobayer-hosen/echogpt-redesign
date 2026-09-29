@@ -8,8 +8,13 @@ import { cn } from "@/lib/utils";
 
 export const Accordion = AccordionPrimitive.Root;
 
-export function AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {
-  return <AccordionPrimitive.Item className={cn("border-b last:border-b-0", className)} {...props} />;
+export function AccordionItem({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Item>) {
+  return (
+    <AccordionPrimitive.Item className={cn("border-b last:border-b-0", className)} {...props} />
+  );
 }
 
 export function AccordionTrigger({

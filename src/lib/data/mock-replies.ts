@@ -44,7 +44,7 @@ export const replyRules: ReplyRule[] = [
     match: /\b(debounce|throttle)\b/i,
     variants: [
       () =>
-        "Here's a small, typed `debounce` helper. It delays calling `fn` until `wait` ms have passed without another call.\n\n```ts\nexport function debounce<Args extends unknown[]>(\n  fn: (...args: Args) => void,\n  wait = 300,\n) {\n  let timer: ReturnType<typeof setTimeout> | undefined;\n\n  return (...args: Args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), wait);\n  };\n}\n```\n\n**Usage**\n\n```ts\nconst search = debounce((query: string) => fetchResults(query), 250);\ninput.addEventListener(\"input\", (e) => search(e.currentTarget.value));\n```\n\n- The generic `Args` keeps the original parameter types.\n- `clearTimeout` resets the timer on every call, so only the last call runs.",
+        'Here\'s a small, typed `debounce` helper. It delays calling `fn` until `wait` ms have passed without another call.\n\n```ts\nexport function debounce<Args extends unknown[]>(\n  fn: (...args: Args) => void,\n  wait = 300,\n) {\n  let timer: ReturnType<typeof setTimeout> | undefined;\n\n  return (...args: Args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), wait);\n  };\n}\n```\n\n**Usage**\n\n```ts\nconst search = debounce((query: string) => fetchResults(query), 250);\ninput.addEventListener("input", (e) => search(e.currentTarget.value));\n```\n\n- The generic `Args` keeps the original parameter types.\n- `clearTimeout` resets the timer on every call, so only the last call runs.',
       () =>
         "A version with a `cancel()` method is handy for React effects:\n\n```ts\ntype Debounced<Args extends unknown[]> = ((...args: Args) => void) & { cancel: () => void };\n\nexport function debounce<Args extends unknown[]>(fn: (...args: Args) => void, wait = 300) {\n  let timer: ReturnType<typeof setTimeout> | undefined;\n  const debounced = ((...args: Args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), wait);\n  }) as Debounced<Args>;\n  debounced.cancel = () => clearTimeout(timer);\n  return debounced;\n}\n```\n\nCall `debounced.cancel()` in the effect cleanup so nothing fires after unmount.\n\n| Technique | When to use |\n| --- | --- |\n| Debounce | Search boxes, resize handlers |\n| Throttle | Scroll position, drag events |",
     ],
@@ -61,7 +61,8 @@ export const replyRules: ReplyRule[] = [
   },
   {
     id: "meeting-email",
-    match: /\b(1:1|one-on-one|meeting)\b.*\b(email|move|reschedule)\b|\b(email|move|reschedule)\b.*\b(1:1|meeting)\b/i,
+    match:
+      /\b(1:1|one-on-one|meeting)\b.*\b(email|move|reschedule)\b|\b(email|move|reschedule)\b.*\b(1:1|meeting)\b/i,
     variants: [
       () =>
         "**Subject:** Moving our 1:1 to Thursday?\n\nHi Sam,\n\nWould it be possible to move our 1:1 this week to **Thursday**? Something came up on my calendar, and Thursday afternoon would let me come better prepared. Any time after 2 pm works for me.\n\nThanks for being flexible!\n\nBest,\nAlex",
@@ -171,7 +172,10 @@ export const actionReplies: Record<string, (input: ActionReplyInput) => string> 
     return `**In plain words**\n\n> ${selection}\n\nThe author is making one point here, and ${focus}. Read it as *“here's the situation, and here's why it matters to you as a reader.”*\n\nWant an example or a one-line version?`;
   },
   rewrite: ({ selection }) => {
-    const improved = selection.replace(FILLER_WORDS, "").replace(/\s{2,}/g, " ").trim();
+    const improved = selection
+      .replace(FILLER_WORDS, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
     return `**Improved version**\n\n> ${improved}\n\n**What changed**\n\n- Removed filler words and repetition\n- Kept your meaning and tone\n- Ready to paste back`;
   },
   "reply-email": () =>

@@ -4,6 +4,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { AnimatePresence, m } from "motion/react";
 import type { ReactNode } from "react";
 
+import { useReturnFocus } from "@/hooks/use-return-focus";
 import { slideInLeft, slideInRight } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +32,7 @@ export function Sheet({
   onCloseAutoFocus,
   children,
 }: SheetProps) {
+  const returnFocus = useReturnFocus(open);
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <AnimatePresence>
@@ -41,7 +43,7 @@ export function Sheet({
               asChild
               forceMount
               aria-describedby={undefined}
-              onCloseAutoFocus={onCloseAutoFocus}
+              onCloseAutoFocus={(event) => returnFocus(event, onCloseAutoFocus)}
             >
               <m.div
                 variants={side === "left" ? slideInLeft : slideInRight}

@@ -12,13 +12,15 @@ interface ExtensionState {
   mode: ExtensionMode;
   tab: ExtensionTab;
   overlay: ExtensionOverlay;
+  /** Conversation shown in the Chat tab (shared with the web app history). */
   conversationId: string | null;
+  /** Models for the next new chat; null model means "use the default model". */
+  modelId: string | null;
+  compareModelId: string | null;
   /** Last text the user selected in the demo article. */
   selection: string;
   /** Whether the page/selection is attached to the next prompt (C-08). */
   contextAttached: boolean;
-  /** Send each prompt to two models (C-04 "compare 2"). */
-  compare: boolean;
   signedIn: boolean;
   onboardingStep: number;
   draft: string;
@@ -30,9 +32,9 @@ interface ExtensionState {
   setTab: (tab: ExtensionTab) => void;
   setOverlay: (overlay: ExtensionOverlay) => void;
   setConversationId: (id: string | null) => void;
+  setModels: (modelId: string | null, compareModelId: string | null) => void;
   setSelection: (selection: string) => void;
   setContextAttached: (attached: boolean) => void;
-  setCompare: (compare: boolean) => void;
   setSignedIn: (signedIn: boolean) => void;
   setOnboardingStep: (step: number) => void;
   setDraft: (draft: string) => void;
@@ -45,9 +47,10 @@ export const useExtensionStore = create<ExtensionState>()((set) => ({
   tab: "chat",
   overlay: null,
   conversationId: null,
+  modelId: null,
+  compareModelId: null,
   selection: "",
   contextAttached: true,
-  compare: false,
   signedIn: true,
   onboardingStep: 0,
   draft: "",
@@ -59,9 +62,9 @@ export const useExtensionStore = create<ExtensionState>()((set) => ({
   setTab: (tab) => set({ tab, overlay: null }),
   setOverlay: (overlay) => set({ overlay }),
   setConversationId: (conversationId) => set({ conversationId }),
+  setModels: (modelId, compareModelId) => set({ modelId, compareModelId }),
   setSelection: (selection) => set({ selection, contextAttached: true }),
   setContextAttached: (contextAttached) => set({ contextAttached }),
-  setCompare: (compare) => set({ compare }),
   setSignedIn: (signedIn) => set({ signedIn }),
   setOnboardingStep: (onboardingStep) => set({ onboardingStep }),
   setDraft: (draft) => set({ draft }),

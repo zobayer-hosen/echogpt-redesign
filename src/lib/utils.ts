@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import type { DateGroup } from "@/types";
+import type { DateGroup, Message, Turn } from "@/types";
 
 /** Merge Tailwind classes, letting later utilities win (PRD §11.1). */
 export function cn(...inputs: ClassValue[]) {
@@ -49,7 +49,9 @@ const fullFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium", timeS
 /** "3:42 PM" today, otherwise "Sep 24". */
 export function formatDate(timestamp: number, now: Date = new Date()) {
   const date = new Date(timestamp);
-  return startOfDay(date) === startOfDay(now) ? timeFormatter.format(date) : dateFormatter.format(date);
+  return startOfDay(date) === startOfDay(now)
+    ? timeFormatter.format(date)
+    : dateFormatter.format(date);
 }
 
 export function formatTime(timestamp: number) {
@@ -83,6 +85,39 @@ export function hostname(url: string) {
   } catch {
     return url;
   }
+}
+
+/** Group messages into turns so compare replies render side by side (A-08). */
+export function buildTurns(messages: Message[]): Turn[] {
+  const turns: Turn[] = [];
+  const byUserId = new Map<string, Turn>();
+
+  for (const message of messages) {
+    if (message.role === "user") {
+      const turn: Turn = { key: message.id, user: message, replies: [] };
+      turns.push(turn);
+      byUserId.set(message.id, turn);
+      continue;
+    }
+    const parent = message.parentId ? byUserId.get(message.parentId) : undefined;
+    if (parent) parent.replies.push(message);
+    else turns.push({ key: message.id, replies: [message] });
+  }
+
+  return turns;
+}
+
+/** "Good morning" / "Good afternoon" / "Good evening". */
+export function greeting(hour = new Date().getHours()) {
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
+}
+
+/** "/chat/abc" → "abc"; anything else → undefined. */
+export function conversationIdFromPath(pathname: string | null) {
+  const match = pathname?.match(/^\/chat\/([^/?#]+)/);
+  return match ? decodeURIComponent(match[1]) : undefined;
 }
 
 /** True on macOS/iOS, used to show ⌘ instead of Ctrl. Safe on the server. */
